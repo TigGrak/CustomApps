@@ -3,7 +3,7 @@
 
 [![](https://img.shields.io/badge/Author-TigGrak-orange.svg)](https://github.com/TigGrak)
 [![GitHub Star](https://img.shields.io/github/stars/TigGrak/CustomApps.svg?label=Star&color=4285dd&logo=github)](https://github.com/TigGrak/CustomApps)
-[![GitHub Star](https://img.shields.io/github/license/TigGrak/CustomApps.svg?label=Star&color=4285dd&logo=github)](https://github.com/TigGrak/CustomApps)
+[![GitHub License](https://img.shields.io/github/license/TigGrak/CustomApps.svg?label=License&color=4285dd&logo=github)](https://github.com/TigGrak/CustomApps/blob/main/LICENSE)
 [![Gitee](https://img.shields.io/badge/Gitee-TigGrak-red.svg?color=ff0000&logo=gitee)](https://tiggrak.gitee.io)
 [![Gitee](https://img.shields.io/badge/Author-TigGrak-blue.svg?label=gitee&color=04A4DE&logo=bilibili)](https://space.bilibili.com/432639062)
 
