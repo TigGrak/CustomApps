@@ -1,195 +1,150 @@
-# CustomApps
-**基于CustomApp的awtrix自定义应用**
+# CustomApps-jiejiari
+**通过API获取当日节假日、纪念日、农历并用CustomApps推送**
 
 [![](https://img.shields.io/badge/Author-TigGrak-orange.svg)](https://github.com/TigGrak)
-[![GitHub Star](https://img.shields.io/github/stars/TigGrak/CustomApps.svg?label=Star&color=4285dd&logo=github)](https://github.com/TigGrak/CustomApps)
-[![GitHub License](https://img.shields.io/github/license/TigGrak/CustomApps.svg?label=License&color=4285dd&logo=github)](https://github.com/TigGrak/CustomApps/blob/main/LICENSE)
-[![Gitee](https://img.shields.io/badge/Gitee-TigGrak-red.svg?color=ff0000&logo=gitee)](https://tiggrak.gitee.io)
-[![Gitee](https://img.shields.io/badge/Author-TigGrak-blue.svg?label=gitee&color=04A4DE&logo=bilibili)](https://space.bilibili.com/432639062)
+![](https://img.shields.io/badge/version-v1.0-brightgreen.svg)
 
 <br />
-<br />
-<br />
 
-## 已开发应用
-> _所有的应用都可以使用[awtrix-push](https://github.com/JunyuMu/awtrix-push/)进行托管和自动推送。_
+### [返回](https://github.com/TigGrak/CustomApps/) | CustomApps
 
-
-| 程序名称 | 介绍 | 版本 | 链接 |
-| :-----:| :----: | :----: | :----: |
-| jiejiari | 通过API获取当日节假日、纪念日、农历并推送 | [![](https://img.shields.io/badge/v1.0-brightgreen.svg)](https://github.com/TigGrak/CustomApps/tree/main/jiejiari) | [链接](https://github.com/TigGrak/CustomApps/tree/main/jiejiari)
 
 <br />
+
+## 配置
+程序主要配置如下
+| 字段 | 类型 | 选项 | 说明 |
+| :----| :---- | :---- | :---- |
+| push_url | str | url | 推送的url，例如 http://127.0.0.1:7000/api/v3/customapp |
+| id | int | \ | CustomAppAPI的ID |
+| mode | int | 0,1 | 查询模式，为1返回国际各类特殊纪念日信息 |
+| updata | int | 0,1,2,3 | 更新类型，0为不更新，1为只更新程序，2为只更新jinfo，3为都更新 |
+| key | str | \ | [天行数据节假日API](https://www.tianapi.com/apiview/139)的API Key |
+| color | str(rgb) | rgb颜色值 | 默认推送文字的颜色，rgb形式，用英文逗号分隔，例如 67,142,219 |
+| cuscolor | str(rgb) | rgb颜色值 | 默认自定义应用推送文字的颜色，rgb形式，用英文逗号分隔，例如 67,142,219 |
+| color_priority | int | 0,1 | API的节假日与自定义节假日重叠时的颜色优先级，1为取API节假日的颜色，0为取自定义节假日的颜色 |
+| icon_priority | int | 0,1 | API的节假日与自定义节假日重叠时的图标优先级，1为取API节假日的图标，0为取自定义节假日的图标 |
+
 <br />
+
+使用awtrix-push进行托管时的必要配置
+> [JIEJIARI]下
+
+| 字段 | 类型 | 选项 | 说明 |
+| :----| :---- | :---- | :---- |
+| crontab | bool | True,False | Crontab时间表，True 为启用，使用此项需设置好时间，与 seconds 冲突 |
+| seconds | int | 秒速 | 每次执行此任务的间隔，秒为单位，与 crontab 冲突|
+
 <br />
 
-## 使用基本教程
-
-
-> _教程使用[jiejiari](https://github.com/TigGrak/CustomApps/tree/main/jiejiari)为例。_
-
-### 一、不使用awtrix-push推送
-<br />
-
-
-1.在jiejiari.py所在文件夹下新建文件 `**.py` 这里**为任意文件名
-
-> 当然可以不在同一个文件夹，只要你能 `import jiejiari` 就行。
-
-<br/>
-
-2.在 `**.py` 写入代码
+因此，在python中，你可以这么写：
 ```python
-import jiejiari
-
-# 这里的config为程序的配置文件，每个程序都不一样，具体请看程序连接。
 config = {'key':'XXXXXXXXXX','mode':'1','color':'67,142,219','cuscolor':'67,142,219',"push_url":"http://127.0.0.1:7000/api/v3/customapp","id":"2","updata":"3","color_priority":"1","icon_priority":"0"}
-
-jiejiari.jiejiari(config)
-```
-<br/>
-
-3.运行 `**.py` 
-
-至此，你已经完成了单次推送，你可以选择修改 `**.py` 完成更多操作。
-
-<br />
-<br />
-<br />
-
-### 二、使用[awtrix-push](https://github.com/JunyuMu/awtrix-push/)进行自动推送。
-> 使用本方法，你需要对[awtrix-push](https://github.com/JunyuMu/awtrix-push/)有熟悉的掌握。
-
-<br />
-
-1.插入代码
-
-awtrix-push默认主要文件树：
-```
-awtrix-push
-│  tasks.py
-│  template.cfg
-│
-└─parse
-        custom.py
-        default.py
-        __init__.py
-```
-
-将 `jiejiari.py` 内的所有代码复制进 `\parse\你的任务托管py文件.py`
-
-例如使用 `default.py`
-```python
-# task 1
-def anotherTask(config):
-    pass
-    # Others...
-
-
-# 插入的代码
-# task 2
-def jiejiari(config):
-    _version = '1.0.0'
-    uptext = ''
-    Upath = os.getcwd()
-    # Others...
 ```
 
 <br />
 
-2.配置config文件
+在awtrix-push的配置文件中，你可以这么写：
 
-在config内插入程序的配置信息
 ```ini
-[DEFAULT]
-# Celery Broker
-broker_url=redis://127.0.0.1:6379/0
-# Your timezone
-timezone=Asia/Shanghai
-
-# Your CustomApp Name
-[ANOTHERTASK]
-# run every seconds
-seconds=20
-# Custom parameter
-push_url=http://127.0.0.1:7000/api/v3/customapp
-id=3
-icon=1177
-# Custom function
-custom=True
-
-# 插入的配置信息，每个程序都不一样，具体请看程序连接。
 [JIEJIARI]
 push_url=http://127.0.0.1:7000/api/v3/customapp
+# 10min执行一次   或者crontab=True
 seconds=600
 id=2
 mode=1
 updata=3
-key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+key=XXXXXXXXXXXXXXXXXX
 color=67,142,219
 cuscolor=67,142,219
 color_priority=1
 icon_priority=0
+```
 
 
-#[Something]
-#...
+<br />
+<br />
+<br />
+
+## 文件
+> 在初次执行jiejiari任务时，程序会自动在托管程序的目录下创建一个名为 `jiejiari` 的文件夹，里面存储着程序的运行所需的文件，可能有以下文件
+
+
+
+| 文件名 | 说明 | 必要性 |
+| :----| :---- |  :---- |
+| %Y-%m.json | 从API读取的节假日信息文件,由程序更新 | 必须 |
+| jinfo.json | 自定义从 %Y-%m.json 获取的节日的英文名、文字颜色和图标，可由程序创建或更新，或自己更改 | 可选 |
+| customday.json | 自定义节假日的配置文件，由自己创建，更改。 | 可选 |
+| error.txt | 错误日志。程序在获取、下载更新时遇到错误时创建或修改 | 可选 |
+| jiejiari-version.py | 最新的程序，当程序的检查更新开启时且获取到新版本时自动下载 | 可选 |
+
+<br />
+<br />
+<br />
+
+## 自定义API节日、纪念日图标
+> **_遇到个位数日期一定要补0，例如:<br />6.7   (×)<br />06.07   (√)_**
+
+你可以通过修改 `jinfo.json` 来自定义API节日的英文名图标和文字颜色
+文件结构：
+```json
+{
+	"version":"1.0.0", //版本号，必填，自动更新时需要（如开启jinfo的自动更新）
+	"jiejiari": {
+		"节日、纪念日中文名": ["English name", "图标ID", "rgb颜色（列表形式）"], //用逗号分隔
+        "示范": ["example","1",[255,255,255]]
+        }
+}
 ```
 <br />
 
+> **_文件格式、语法错误可能会导致程序崩溃（最好删除注释），请注意！！!_**
 
-3.重启awtrix-push服务。
+> 程序会自动识别该节日对应的英文名，图标，颜色，不需要重新启动程序（热修改）。
 
-至此，你已经完成了awtrix-push的自定义程序任务配置，awtrix-push将会根据你的配置进行自动推送。
+> 如果没有 `jinfo.json` 或程序找不到对应的颜色和图标ID，程序将会推送默认图标（不可修改）和默认颜色（可修改）。
+
+> 天行数据API会提供部分节假日、纪念日的英文名，如果某节假日、纪念日没有英文名，程序将在 `jinfo.json` 中寻找，如没有 `jinfo.json` 文件或寻找不到，程序将不予推送。
+
 
 <br />
 <br />
 <br />
 
-### 三、其他推送方法
-当然，你可以修改 `jiejiari.py` 并编译使其被系统托管，例如
-```python
-import models
+## 自定义节日、纪念日
 
-def jiejiari(config):
-    _version = '1.0.0'
-    uptext = ''
-    Upath = os.getcwd()
-    # Others...
+你可以通过创建修改 `jinfo.json` 来自定义节日和节日的英文名图标和文字颜色
 
-if  __name__ == '__main__':
-    config = {'key':'XXXXXXXXXX','mode':'1','color':'67,142,219','cuscolor':'67,142,219',"push_url":"http://127.0.0.1:7000/api/v3/customapp","id":"2","updata":"3","color_priority":"1","icon_priority":"0"}
-    
-    jiejiari(config)
+> **_程序不会自动创建 `customday.json` ，你需要手动创建。_**
 
+> **_遇到个位数日期一定要补0，例如:<br />6.7   (×)<br />06.07   (√)_**
 
+文件结构：
+```json
+{
+    "info":"BY TigGrak", //文件信息，可随意填写（不要破坏json语法）
+    "jiejiari":{
+        "日期(月-日)":["jieri english name","图标ID","rgb颜色（列表形式）"],
+        //示范
+        "06-10": ["example","1",[255,255,255]]
+
+        }
+}
 ```
 
+> **_文件格式、语法错误可能会导致程序崩溃（最好删除注释），请注意！！!_**
+
+> 程序会自动识别自定义节日，图标，颜色，不需要重新启动程序（热修改）。
+
+
 <br />
 <br />
 <br />
 
-## License
-```
-MIT License
+## 其他
 
-Copyright (c) 2022 TigGrak
+[天行数据](https://www.tianapi.com/)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+[天行数据节假日API](https://www.tianapi.com/apiview/139)
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```

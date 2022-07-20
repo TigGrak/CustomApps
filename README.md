@@ -28,7 +28,7 @@
 
 > _教程使用[jiejiari](https://github.com/TigGrak/CustomApps/tree/main/jiejiari)为例。_
 
-### 一、不使用awtrix-push推送
+### 一、使用自己的python程序推送
 <br />
 
 
