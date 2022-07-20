@@ -1,5 +1,5 @@
 # CustomApps
-**基于CustomApp的awtrix自定义应用**
+**一些基于CustomApp的Awtrix自定义应用程序**
 
 [![](https://img.shields.io/badge/Author-TigGrak-orange.svg)](https://github.com/TigGrak)
 [![GitHub Star](https://img.shields.io/github/stars/TigGrak/CustomApps.svg?label=Star&color=4285dd&logo=github)](https://github.com/TigGrak/CustomApps)
