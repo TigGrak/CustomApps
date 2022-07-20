@@ -7,6 +7,7 @@
 项目地址、具体使用方法、开源许可：https://github.com/TigGrak/CustomApps
 BILIBILI:https://space.bilibili.com/432639062
 主页：https://tiggrak.gitee.io
+Copyright (c) 2022 TigGrak
 
 
 
@@ -21,6 +22,10 @@ Festival get api: https://www.tianapi.com/apiview/139 Free (100 times a day)
 Project address, specific use method, open source license: https://github.com/TigGrak/CustomApps
 BILIBILI: https://space.bilibili.com/432639062
 Home page: https://tiggrak.gitee.io
+Copyright (c) 2022 TigGrak
+
+
+
 It's written in a hurry and the code is messy. If you have time, optimize it later. (maybe update: -p)
 """
 
