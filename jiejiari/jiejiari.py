@@ -58,8 +58,13 @@ def jiejiari(config):
         with open(f'./jiejiari/{thisMonth}.json','w',encoding='UTF-8') as f:
             f.write(json.dumps(r.text))
 
-    #更新（程序）
+    
     update_mode = config['updata']
+    color_priority = config['color_priority']
+    icon_priority = config['icon_priority']
+
+
+    #更新（程序）
     try:
         uplink = 'https://tiggrak.gitee.io/project/jiejiari/info'
         if update_mode != '0':
@@ -70,6 +75,9 @@ def jiejiari(config):
             jinfoLink = jiejiariInfo["jinfo"]
             pyupdataLink = jiejiariInfo["pyUpdata"]
             pyGithub = jiejiariInfo["github"]
+            FD0 = jiejiariInfo["FD"][0]
+            FD1 = jiejiariInfo["FD"][1]
+            FD2 = jiejiariInfo["FD"][2]
             
         if update_mode in ['1','3']:
             if newpyVersion != _version:
@@ -84,7 +92,7 @@ def jiejiari(config):
         #错误输出
         update_mode = 0 #关闭更新，设置为离线模式
         #print(e.__class__.__name__)
-        uptext = f'An error found while trying to get updates:{str(e.__class__.__name__)}. You can go to GitHub to feed back the error.Detailed errors have been saved in{Upath}/jiejiari/error.txt'
+        uptext = f'An error found while trying to get updates:{str(e.__class__.__name__)}. You can go to GitHub to feed back the error. Detailed errors have been saved in {Upath}/jiejiari/error.txt'
         uptextColor = [255,0,0]
         upicon = "23"
         errorTime = datetime.now().strftime(r"%Y-%m-%d_%H:%M:%S")
@@ -110,67 +118,52 @@ def jiejiari(config):
             todayInfo = i
             break
     
-
+    lm1cn2numList = {
+        '正':'1',
+        '二':'2',
+        '三':'3',
+        '四':'4',
+        '五':'5',
+        '六':'6',
+        '七':'7',
+        '八':'8',
+        '九':'9',
+        '十':'10',
+        '冬':'11',
+        '腊':'12'
+    }
+    
     #将农历月份汉字转换为ax支持的数字
-    if todayInfo['lunarmonth'][0]=='正':
-        lm1 = '1'
-    elif todayInfo['lunarmonth'][0]=='二':
-        lm1 = '2'
-    elif todayInfo['lunarmonth'][0]=='三':
-        lm1 = '3'
-    elif todayInfo['lunarmonth'][0]=='四':
-        lm1 = '4'
-    elif todayInfo['lunarmonth'][0]=='五':
-        lm1 = '5'
-    elif todayInfo['lunarmonth'][0]=='六':
-        lm1 = '6'
-    elif todayInfo['lunarmonth'][0]=='七':
-        lm1 = '7'
-    elif todayInfo['lunarmonth'][0]=='八':
-        lm1 = '8'
-    elif todayInfo['lunarmonth'][0]=='九':
-        lm1 = '9'
-    elif todayInfo['lunarmonth'][0]=='十':
-        lm1 = '10'
-    elif todayInfo['lunarmonth'][0]=='冬':
-        lm1 = '11'
-    elif todayInfo['lunarmonth'][0]=='腊':
-        lm1 = '12'
+    lm1 = lm1cn2numList[todayInfo['lunarmonth'][0]]
 
+    ld1cn2numList = {
+        '初':'',
+        '十':'1',
+        '二':'2',
+        '廿':'2',
+        '三':'3'
+    }
 
     #将农历日期汉字转换为ax支持的数字
     #十位数
-    if todayInfo['lunarday'][0]=='初':
-        ld1 = ''
-    elif todayInfo['lunarday'][0]=='十':
-        ld1 = '1'
-    elif todayInfo['lunarday'][0]=='二':
-        ld1 = '1'
-    elif todayInfo['lunarday'][0]=='廿':
-        ld1 = '2'
-    elif todayInfo['lunarday'][0]=='三':
-        ld1 = '3'
+    ld1 = ld1cn2numList[todayInfo['lunarday'][0]]
+
+    ld2cn2numList = {
+        '一':'1',
+        '二':'2',
+        '三':'3',
+        '四':'4',
+        '五':'5',
+        '六':'6',
+        '七':'7',
+        '八':'8',
+        '九':'9',
+        '十':'0'
+    }
+
+
     #个位数
-    if todayInfo['lunarday'][1]=='一':
-        ld2 = '1'
-    elif todayInfo['lunarday'][1]=='二':
-        ld2 = '2'
-    elif todayInfo['lunarday'][1]=='三':
-        ld2 = '3'
-    elif todayInfo['lunarday'][1]=='四':
-        ld2 = '4'
-    elif todayInfo['lunarday'][1]=='五':
-        ld2 = '5'
-    elif todayInfo['lunarday'][1]=='六':
-        ld2 = '6'
-    elif todayInfo['lunarday'][1]=='七':
-        ld2 = '7'
-    elif todayInfo['lunarday'][1]=='八':
-        ld2 = '8'
-    elif todayInfo['lunarday'][1]=='九':
-        ld2 = '9'
-    elif todayInfo['lunarday'][1]=='十':
-        ld2 = '0'
+    ld2 = ld2cn2numList[todayInfo['lunarday'][1]]
 
     #加载文件
     jinfo = {}
@@ -221,9 +214,12 @@ def jiejiari(config):
     
     if customdayAll:
         if todayNY in customdayAll['jiejiari']:
-            cusday = customdayAll['jiejiari'][todayNY][0]
-            cusicon = customdayAll['jiejiari'][todayNY][1]
-            cuscolor = customdayAll['jiejiari'][todayNY][2]
+            if customdayAll['jiejiari'][todayNY][0]:
+                cusday = customdayAll['jiejiari'][todayNY][0]
+            if customdayAll['jiejiari'][todayNY][1]:
+                cusicon = customdayAll['jiejiari'][todayNY][1]
+            if customdayAll['jiejiari'][todayNY][2]:
+                cuscolor = customdayAll['jiejiari'][todayNY][2]
     
 
     if todayInfo['name']:
@@ -245,23 +241,42 @@ def jiejiari(config):
                     color = jinfo['jiejiari'][todayInfo['name']][2]
 
     #愚人节小彩蛋
-    if name == '愚人节':
-        enname = "yaD s'looF lirpA"
+    if update_mode != '0':
+        if name == '愚人节':
+            color_priority = '1'
+            icon_priority = '1'
+            enname = FD0
+            icon = FD1
+            color = [int(FD2[0]),int(FD2[1]),int(FD2[2])]
 
 
     #整理推送信息
     #两种节日（API、自定义）
+
     if enname and cusday:
         finallytext = f'{lunar}==={enname}  \  {cusday}==='
         #获取优先级
-        if config['color_priority'] == '1':
+        
+        if color_priority == '1' and color != [int(rgb[0]),int(rgb[1]),int(rgb[2])]:
             finallycolor = color
-        else:
+        elif color_priority == '0' and cuscolor != [int(cusrgb[0]),int(cusrgb[1]),int(cusrgb[2])]:
             finallycolor = cuscolor
-        if config['icon_priority'] == '1':
-            finallyicon = int(icon)
         else:
+            if color != [int(rgb[0]),int(rgb[1]),int(rgb[2])]:
+                finallycolor = color
+            else:
+                finallycolor = cuscolor
+
+        if icon_priority == '1' and icon != '1972':
+            finallyicon = int(icon)
+        elif icon_priority == '0' and cusicon != '1972':
             finallyicon = int(cusicon)
+        else:
+            if icon != '1972':
+                finallyicon = int(icon)
+            else:
+                finallyicon = int(cusicon)
+
 
     #只有API节日
     elif enname:
@@ -293,7 +308,7 @@ def jiejiari(config):
         "color":finallycolor
     }
     awtrix_r = requests.post(config["push_url"], json=push_data)
+
     if awtrix_r.status_code != requests.codes.ok:
         return "failure"
     return "success"
-

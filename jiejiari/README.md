@@ -1,9 +1,12 @@
 # CustomApps-jiejiari
-**通过API获取当日节假日、纪念日、农历并用CustomApps推送**
+**通过API获取当日节假日、纪念日、农历并用CustomApps推送至[Awtrix](https://awtrix.blueforcer.de/)**
 
 [![](https://img.shields.io/badge/Author-TigGrak-orange.svg)](https://github.com/TigGrak)
 [![](https://img.shields.io/badge/version-v1.0-brightgreen.svg)](https://github.com/TigGrak/CustomApps/tree/main/jiejiari)
 
+![](https://awtrix.blueforcer.de/icons/1972)
+
+<br />
 <br />
 
 ### [返回](https://github.com/TigGrak/CustomApps/) | CustomApps
@@ -73,8 +76,8 @@ icon_priority=0
 
 | 文件名 | 说明 | 必要性 |
 | :----| :---- |  :---- |
-| %Y-%m.json | 从API读取的节假日信息文件,由程序更新 | 必须 |
-| jinfo.json | 自定义从 %Y-%m.json 获取的节日的英文名、文字颜色和图标，可由程序创建或更新，或自己更改 | 可选 |
+| YYYY-mm.json | 从API读取的节假日信息文件,由程序更新 | 必须 |
+| jinfo.json | 自定义从 YYYY-mm.json 获取的节日的英文名、文字颜色和图标，可由程序创建或更新，或自己更改 | 可选 |
 | customday.json | 自定义节假日的配置文件，由自己创建，更改。 | 可选 |
 | error.txt | 错误日志。程序在获取、下载更新时遇到错误时创建或修改 | 可选 |
 | jiejiari-version.py | 最新的程序，当程序的检查更新开启时且获取到新版本时自动下载 | 可选 |
@@ -85,7 +88,7 @@ icon_priority=0
 
 ## 自定义API节日、纪念日图标
 
-> **_⚠️遇到个位数日期一定要补0，例如:<br />6.7   (×)<br />06.07   (√)_**
+
 
 你可以通过修改 `jinfo.json` 来自定义API节日的英文名图标和文字颜色
 
@@ -118,6 +121,12 @@ icon_priority=0
 
 > 如果没有 `jinfo.json` 或程序找不到对应的颜色和图标ID，程序将会推送默认图标（不可修改）和默认颜色（可修改）。
 
+默认图标：
+
+<img src="https://awtrix.blueforcer.de/icons/1972" width="10%" height="10%" />
+
+<br />
+
 > 天行数据API会提供部分节假日、纪念日的英文名，如果某节假日、纪念日没有英文名，程序将在 `jinfo.json` 中寻找，如没有 `jinfo.json` 文件或寻找不到，程序将不予推送。
 
 
@@ -133,14 +142,19 @@ icon_priority=0
 
 > **_⚠️遇到个位数日期一定要补0，例如:<br />6.7   (×)<br />06.07   (√)_**
 
+> **_⚠️日期不要加年份，加公历的月-日（mm-dd）_**
+
+> **_⚠️一个日期只能设置一个节日、纪念日，如果要设置多个，可以在节日、纪念日的名字用 `/` 号隔开。_**
+
 文件结构：
 ```json
 {
     "info":"BY TigGrak", //文件信息，可随意填写（不要破坏json语法）
     "jiejiari":{
-        "日期(月-日)":["jieri english name","图标ID","rgb颜色（列表形式）"],
+        "mm-dd":["jieri english name","图标ID","rgb颜色（列表形式）"],
         //示范
-        "06-10": ["example","1",[255,255,255]]
+        "06-10": ["example","1",[255,255,255]],
+        "06-11": ["day1 / day2","212",[255,255,0]]
 
         }
 }
@@ -153,6 +167,67 @@ icon_priority=0
 
 > 程序会自动识别自定义节日，图标，颜色，不需要重新启动程序（热修改）。
 
+<br />
+<br />
+<br />
+
+## 事件
+
+> **以下的节日、纪念日等统称为“特殊日”**
+
+### 一、无API特殊日、自定义特殊日事件
+Awtrix将会显示默认图标和默认颜色和当天的农历日期（ `color` 字段的默认颜色）。
+
+<br />
+
+
+### 二、有API特殊日、自定义特殊日事件其中之一
+Awtrix将会显示API当天农历、API特殊日或自定义特殊日和对应的图标和颜色（如果能找到或有修改、自定义颜色图标的话）。
+
+格式： `{农历}==={特殊日}===`
+
+> 如果找不到对应的图标和颜色，将会显示默认图标和颜色。（`color` 字段为API特殊日默认颜色， `cuscolor` 字段为自定义特殊日默认颜色）
+
+<br />
+
+### 三、API特殊日、自定义特殊日事件重复
+
+Awtrix将会显示API当天农历、API特殊日、自定义特殊日和对应的图标和颜色（如果能找到或有修改、自定义颜色图标的话）。
+
+格式： `{农历}======{API特殊日}  \  {自定义特殊日}======`
+
+> 当天显示的图标、颜色根据优先级判断，但是，当程序找不到优先图标，则会使用次要图标，如还是找不到次要图标，则会显示默认图标。
+
+<br />
+
+### 三、发现并下载更新事件
+> 本事件只有在无特殊日事件且发现更新时才会发生。
+
+Awtrix将会显示更新图标、当天农历、新程序的版本、已下载新程序的路径和github链接。
+
+更新图标：
+
+<img src="https://awtrix.blueforcer.de/icons/506" width="10%" height="10%" />
+
+格式： `Found a new version available: {新程序的版本}. Downloaded to {已下载新程序的路径}, GitHub: {github链接}`
+
+> 程序会自动下载新版本，但不会安装和迁移代码，需要你手动操作 ，新程序代码的路径一般为 `托管程序的目录\jiejiari\`
+
+<br />
+
+### 三、错误事件
+
+> 本事件只有在无特殊日事件且获取更新时遇到错误才会发生。
+
+Awtrix将会显示错误图标、错误类型和错误日志的路径。
+
+错误图标:
+
+<img src="https://awtrix.blueforcer.de/icons/23" width="10%" height="10%" />
+
+格式： `An error found while trying to get updates:{错误类型}. You can go to GitHub to feed back the error. Detailed errors have been saved in {错误日志的路径}`
+
+> 错误日志只有在发现错误时才会创建或追加，文件名一般为 `error.txt` ，路径一般为 `托管程序的目录\jiejiari\`
 
 <br />
 <br />

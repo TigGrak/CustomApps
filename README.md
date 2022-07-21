@@ -1,5 +1,5 @@
 # CustomApps
-**一些基于CustomApp的Awtrix自定义应用程序**
+**一些基于CustomApp的[Awtrix](https://awtrix.blueforcer.de/)自定义应用程序**
 
 [![](https://img.shields.io/badge/Author-TigGrak-orange.svg)](https://github.com/TigGrak)
 [![GitHub Star](https://img.shields.io/github/stars/TigGrak/CustomApps.svg?label=Star&color=4285dd&logo=github)](https://github.com/TigGrak/CustomApps)
@@ -58,7 +58,7 @@ jiejiari.jiejiari(config)
 <br />
 
 ### 二、使用[awtrix-push](https://github.com/JunyuMu/awtrix-push/)进行自动推送。
-> 使用本方法，你需要对[awtrix-push](https://github.com/JunyuMu/awtrix-push/)有熟悉的掌握。
+> 使用本方法，你需要对awtrix-push有熟悉的掌握。
 
 <br />
 
