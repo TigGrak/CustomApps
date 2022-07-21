@@ -227,7 +227,16 @@ Awtrix将会显示错误图标、错误类型和错误日志的路径。
 
 格式： `An error found while trying to get updates:{错误类型}. You can go to GitHub to feed back the error. Detailed errors have been saved in {错误日志的路径}`
 
+> 你可以根据错误类型和错误日志到[这里](https://github.com/TigGrak/CustomApps/issues)进行反馈
+
 > 错误日志只有在发现错误时才会创建或追加，文件名一般为 `error.txt` ，路径一般为 `托管程序的目录\jiejiari\`
+
+
+错误日志的格式一般为：
+```
+[1999-09-09_09:09:09] 错误内容1 
+[2000-02-20_20:20:20] 错误内容2 
+```
 
 <br />
 <br />
