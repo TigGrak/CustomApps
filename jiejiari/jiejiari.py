@@ -210,7 +210,7 @@ def jiejiari(config):
     enname = ''
     rgb = config['color'].split(',')
     color=[int(rgb[0]),int(rgb[1]),int(rgb[2])]
-    icon=1972
+    icon='1972'
 
 
     #寻找自定义节假日
