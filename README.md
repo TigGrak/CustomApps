@@ -2,7 +2,7 @@
 **一些基于CustomApp的[Awtrix](https://awtrix.blueforcer.de/)自定义应用程序**
 
 [![](https://img.shields.io/badge/Author-TigGrak-orange.svg)](https://github.com/TigGrak)
-[![GitHub Star](https://img.shields.io/github/stars/TigGrak/CustomApps.svg?label=Star&color=4285dd&logo=github)](https://github.com/TigGrak/CustomApps)
+[![GitHub Star]( )](https://github.com/TigGrak/CustomApps)
 [![GitHub License](https://img.shields.io/github/license/TigGrak/CustomApps.svg?label=License&color=4285dd&logo=github)](https://github.com/TigGrak/CustomApps/blob/main/LICENSE)
 [![Gitee](https://img.shields.io/badge/Gitee-TigGrak-red.svg?color=ff0000&logo=gitee)](https://tiggrak.gitee.io)
 [![Gitee](https://img.shields.io/badge/Author-TigGrak-blue.svg?label=gitee&color=04A4DE&logo=bilibili)](https://space.bilibili.com/432639062)
@@ -10,6 +10,19 @@
 <br />
 <br />
 <br />
+
+
+> 注意，这里的所有程序都是基于CustomApp制作的，你需要先在awtrix的操纵面板控制台中的应用商店下载CustomApp并记录好对应的url和id。
+
+<img src="https://awtrix.blueforcer.de/icons/1060" width="20%" height="20%" />
+
+> CustomApp的默认url为 `https://127.0.0.1:7000/api/v3/customapp`
+
+
+<br />
+<br />
+<br />
+
 
 ## 已开发应用
 > _所有的应用都可以使用[awtrix-push](https://github.com/JunyuMu/awtrix-push/)进行托管和自动推送。_
