@@ -2,7 +2,7 @@
 **通过API获取当日节假日、纪念日、农历并用CustomApps推送**
 
 [![](https://img.shields.io/badge/Author-TigGrak-orange.svg)](https://github.com/TigGrak)
-![](https://img.shields.io/badge/version-v1.0-brightgreen.svg)
+[![](https://img.shields.io/badge/version-v1.0-brightgreen.svg)](https://github.com/TigGrak/CustomApps/tree/main/jiejiari)
 
 <br />
 
